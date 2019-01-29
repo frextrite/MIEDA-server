@@ -11,4 +11,11 @@ function convertToImage(base64String) {
   })
 }
 
+function getFileName() {
+  let datetime = new Date();
+  let filename = `IMG_${datetime.toISOString().replace('T', ' ').substr(0, 19)}`;
+  console.log(filename);
+  return filename;
+}
+
 app.listen(port, () => console.log(`Listening on port ${port}\n`))
