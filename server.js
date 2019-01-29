@@ -26,6 +26,10 @@ const options = {
 }
 
 app.get('/', (req, res) => res.send('Hello, World!'))
+app.get('/analyze', (req, res) => {
+  getEmotionData('1.jpg');
+  res.send('gg');
+})
 
 function convertToImage(base64String) {
   let filename = getFileName();
