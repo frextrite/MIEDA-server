@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment');
 const fs = require('fs');
 const app = express()
 const port = 3000;
@@ -12,8 +13,8 @@ function convertToImage(base64String) {
 }
 
 function getFileName() {
-  let datetime = new Date();
-  let filename = `IMG_${datetime.toISOString().replace('T', ' ').substr(0, 19)}`;
+  let datetime = moment().format('YYYYMMDD_HHmmss');
+  let filename = `IMG_${datetime}.jpg`;
   console.log(filename);
   return filename;
 }
