@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/frextrite/MIEDA-server#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "moment": "^2.24.0"
   }
 }
