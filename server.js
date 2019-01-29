@@ -7,7 +7,8 @@ const port = 3000;
 app.get('/', (req, res) => res.send('Hello, World!'))
 
 function convertToImage(base64String) {
-  fs.writeFile('image.jpg', base64String, {encoding: 'base64'}, (error) => {
+  let filename = getFileName();
+  fs.writeFile(filename, base64String, {encoding: 'base64'}, (error) => {
     console.log(error);
   })
 }
