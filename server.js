@@ -1,9 +1,12 @@
 const express = require('express');
 const moment = require('moment');
 const axios = require('axios');
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const app = express()
 const port = 3000;
+
+app.use(bodyParser.json());
 
 // Face API Configuration
 const subscriptionKey = process.env.FACEAPISUBSCRIPTIONKEY;

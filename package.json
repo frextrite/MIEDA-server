@@ -29,6 +29,7 @@
   "homepage": "https://github.com/frextrite/MIEDA-server#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "moment": "^2.24.0"
   },
