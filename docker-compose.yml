@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  node-server:
+    image: mieda-server-dev
+    working_dir: /usr/src/app
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    command:
+      ./node_modules/nodemon/bin/nodemon.js server.js
