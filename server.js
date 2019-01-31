@@ -97,15 +97,17 @@ function processResults(someJSON) {
 
 // '/analyze' endpoint function
 function analyze(req, res) {
-  //  req - [POST]
-  //  body = {
-  //    imageBase64: 'a base64 string of an image'
-  //    source: 'web/android/ios'
-  //  }
-  //  res - JSON
-  //  body = {
-  //    emotion: 'string indicating the emotion of the person'
-  //  }
+  /** req - [POST]
+  *   body = {
+  *     imageBase64: 'a base64 string of an image'
+  *     source: 'web/android/ios'
+  *   }
+  *
+  *   res - [JSON]
+  *   body = {
+  *     emotion: 'string indicating the emotion of the person'
+  *   }
+  */
 
   // get base64 string from the request body
   let base64String = req.body.imgBase64;
