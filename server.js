@@ -55,16 +55,15 @@ function getEmotionData(filename) {
   let image = fs.createReadStream(filename);
 
   // send POST request to face API
-  axios.post(apiURL, image, options)
-    .then((response) => {
-      // response.data is an array of detected faces
-      console.log(response.data[0]);
-      return response;
-    })
-    .catch((error) => {
-      console.log('Caught error', error);
-    }
-  );
+  fetchDataFromAPI(image).then((response) => {
+    console.log(response);
+  })
+}
+
+function fetchDataFromAPI(readStream) {
+  return axios.post(apiURL, readStream, options).then((response) => {
+    return response.data;
+  });
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}\n`))
