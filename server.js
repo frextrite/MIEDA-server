@@ -115,7 +115,7 @@ function analyze(req, res) {
 
   // get emotion data and return the response
   getEmotionData(filename).then((response) => {
-    res.send(response);
+    res.json(response);
   });
 }
 
