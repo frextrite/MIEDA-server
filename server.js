@@ -55,8 +55,9 @@ function getEmotionData(filename) {
   let image = fs.createReadStream(filename);
 
   // send POST request to face API
-  fetchDataFromAPI(image).then((response) => {
-    console.log(response);
+  return fetchDataFromAPI(image).then((response) => {
+    let processedResult = processResults(response);
+    return processedResult;
   })
 }
 
@@ -64,6 +65,11 @@ function fetchDataFromAPI(readStream) {
   return axios.post(apiURL, readStream, options).then((response) => {
     return response.data;
   });
+}
+
+function processResults(someJSON) {
+  console.log('I got some JSON', someJSON);
+  return someJSON;
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}\n`))
