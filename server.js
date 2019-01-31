@@ -33,6 +33,7 @@ app.get('/analyze', (req, res) => {
   getEmotionData('1.jpg');
   res.send('gg');
 })
+app.post('/analyze', analyze)
 
 function convertToImage(base64String) {
   let filename = getFileName();
@@ -70,6 +71,16 @@ function fetchDataFromAPI(readStream) {
 function processResults(someJSON) {
   console.log('I got some JSON', someJSON);
   return someJSON;
+}
+
+function analyze(req, res) {
+  let base64String = req.body.imgBase64;
+
+  let filename = convertToImage(base64String);
+
+  getEmotionData(filename).then((response) => {
+    res.send(response);
+  });
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}\n`))
