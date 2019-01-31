@@ -36,8 +36,9 @@ app.get('/analyze', (req, res) => {
 
 function convertToImage(base64String) {
   let filename = getFileName();
-  fs.writeFile(filename, base64String, {encoding: 'base64'}, (error) => {
-    console.log(error);
+  // Synchronously write image data to disk
+  fs.writeFileSync(filename, base64String, {encoding: 'base64'}, (error) => {
+    console.log("Error in converting base64 to an image.");
   })
   return filename;
 }
