@@ -44,35 +44,17 @@ app.get('/analyze', (req, res) => {
 app.post('/analyze', analyze)
 
 
-// Convert base64 string to an Image and save it on disk
-function convertToImage(base64String) {
-  // get unique filename to create a temporary image
-  let filename = getFileName();
-  // Synchronously write image data to disk
-  fs.writeFileSync(filename, base64String, {encoding: 'base64'}, (error) => {
-    console.log("Error in converting base64 to an image.");
-  })
-  return filename;
-}
-
-
-// Get a unique filename based on current date and time
-function getFileName() {
-  // get current date/time in required format
-  let datetime = moment().format('YYYYMMDD_HHmmss');
-  // create a unique filename
-  let filename = `IMG_${datetime}.jpg`;
-  return filename;
+// create a buffer from base64 string
+function createImageBuffer(base64String) {
+  let imageBuffer = new Buffer(base64String, 'base64');
+  return imageBuffer;
 }
 
 
 // Get emotion data of the image
-function getEmotionData(filename) {
-  // create image stream
-  let image = fs.createReadStream(filename);
-
+function getEmotionData(imageBuffer) {
   // call API and process the results
-  return fetchDataFromAPI(image).then((response) => {
+  return fetchDataFromAPI(imageBuffer).then((response) => {
     let processedResult = processResults(response);
     return processedResult;
   })
@@ -112,11 +94,11 @@ function analyze(req, res) {
   // get base64 string from the request body
   let base64String = req.body.imgBase64;
 
-  // convert the base64 string into an image and get the image name
-  let filename = convertToImage(base64String);
+  // convert the base64 string into a buffer
+  let imageBuffer = createImageBuffer(base64String);
 
   // get emotion data and return the response
-  getEmotionData(filename).then((response) => {
+  getEmotionData(imageBuffer).then((response) => {
     res.json(response);
   });
 }
